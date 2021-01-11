@@ -36,6 +36,17 @@ namespace ProtectApplicatio.Jwt.Api
                 x.SetJwksOptions(new JwkOptions("https://localhost:5001/jwks"));
             });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ManagerOnly", policy => policy.RequireClaim("EmployeeFunction", "Manager"));
+
+                options.AddPolicy("ManagerFromSalesDepartment", policy =>
+                    policy.RequireAssertion(context =>
+                        context.User.Identity != null &&
+                        context.User.Identity.IsAuthenticated &&
+                        context.User.HasClaim("EmployeeFunction", "Manager") &&
+                        context.User.HasClaim("Department", "Sales")));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
