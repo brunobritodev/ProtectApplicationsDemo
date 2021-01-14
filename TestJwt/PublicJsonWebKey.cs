@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using Microsoft.IdentityModel.Tokens;
 
 namespace TestJwt
 {
@@ -10,6 +10,7 @@ namespace TestJwt
     /// </summary>
     public class PublicJsonWebKey
     {
+        public PublicJsonWebKey() { }
         public PublicJsonWebKey(JsonWebKey jsonWebKey)
         {
             KeyType = jsonWebKey.Kty;
@@ -48,7 +49,7 @@ namespace TestJwt
         /// Use of this member is REQUIRED.
         /// </summary>
         [JsonPropertyName("kty")]
-        public string KeyType { get; }
+        public string KeyType { get; set; }
 
         /// <summary>
         /// The "use" (public key use) parameter identifies the intended use of the public key.
@@ -59,7 +60,7 @@ namespace TestJwt
         /// Use of this member is OPTIONAL.
         /// </summary>
         [JsonPropertyName("use")]
-        public string PublicKeyUse { get; private set; }
+        public string PublicKeyUse { get; set; }
 
         /// <summary>
         /// The "key_ops" (key operations) parameter identifies the operation(s) for which the key is intended to be used.
@@ -76,7 +77,7 @@ namespace TestJwt
         /// Use of this member is OPTIONAL.
         /// </summary>
         [JsonPropertyName("key_ops")]
-        public IList<string> KeyOperations { get; }
+        public IList<string> KeyOperations { get; set; }
 
         /// <summary>
         /// The "alg" (algorithm) parameter identifies the algorithm intended for use with the key.
@@ -86,7 +87,7 @@ namespace TestJwt
         /// Use of this member is OPTIONAL.
         /// </summary>
         [JsonPropertyName("alg")]
-        public string Algorithm { get; }
+        public string Algorithm { get; set; }
 
         /// <summary>
         /// The "kid" (key ID) parameter is used to match a specific key.
@@ -99,7 +100,7 @@ namespace TestJwt
         /// Use of this member is OPTIONAL.
         /// </summary>
         [JsonPropertyName("kid")]
-        public string KeyId { get; }
+        public string KeyId { get; set; }
 
         /// <summary>
         /// The "x5u" (X.509 URL) parameter is a URI [RFC3986] that refers to a resource for an X.509 public key certificate or certificate chain [RFC5280].
@@ -127,7 +128,7 @@ namespace TestJwt
         ///   o  "P-521"
         /// </summary>
         [JsonPropertyName("crv")]
-        public string CurveName { get; }
+        public string CurveName { get; set; }
 
         /// <summary>
         /// The "x" (x coordinate) parameter contains the x coordinate for the
@@ -139,7 +140,7 @@ namespace TestJwt
         /// string must be 66 octets long.
         /// </summary>
         [JsonPropertyName("x")]
-        public string X { get; }
+        public string X { get; set; }
 
         /// <summary>
         /// The "y" (y coordinate) parameter contains the y coordinate for the
@@ -151,7 +152,7 @@ namespace TestJwt
         /// string must be 66 octets long.
         /// </summary>
         [JsonPropertyName("y")]
-        public string Y { get; }
+        public string Y { get; set; }
 
 
         /// <summary>

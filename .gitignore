@@ -255,3 +255,6 @@ docs/.vscode
 # Log files
 **/*log*.txt
 *.db
+# project especific
+*.jwk
+*.key
