@@ -26,7 +26,7 @@ namespace IdentityServer
         public static IEnumerable<ApiResource> ApiResources =>
             new[]
             {
-                new ApiResource("api1", "API #1") { Scopes = { "api1" }, UserClaims = {"openid", "EmployeeFunction", "role", "Department" } }
+                new ApiResource("api1", "API #1") { Scopes = { "api1" }, UserClaims = {"openid", "EmployeeFunction", "role", "Department" } },
             };
 
         public static IEnumerable<Client> Clients =>
@@ -75,7 +75,7 @@ namespace IdentityServer
                             new Claim(JwtClaimTypes.Email, "AliceSmith@email.com"),
                             new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                             new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
-                            new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json)
+                            new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json),
                         }
                     },
                     new TestUser

@@ -1,9 +1,9 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using Microsoft.IdentityModel.Tokens;
 
-namespace TestJwt
+namespace GenerateJwt
 {
     /// <summary>
     /// It represent a public JWK to expose at JWKS endpoint
