@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["ProtectApplication/ProtectApplication.csproj", "ProtectApplication/"]
-RUN dotnet restore "ProtectApplication/ProtectApplication.csproj"
+COPY ["ProtectApplication.Cookies/ProtectApplication.Cookies.csproj", "ProtectApplication.Cookies/"]
+RUN dotnet restore "ProtectApplication.Cookies/ProtectApplication.Cookies.csproj"
 COPY . .
-WORKDIR "/src/ProtectApplication"
-RUN dotnet build "ProtectApplication.csproj" -c Release -o /app/build
+WORKDIR "/src/ProtectApplication.Cookies"
+RUN dotnet build "ProtectApplication.Cookies.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ProtectApplication.csproj" -c Release -o /app/publish
+RUN dotnet publish "ProtectApplication.Cookies.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ProtectApplication.dll"]
+ENTRYPOINT ["dotnet", "ProtectApplication.Cookies.dll"]
