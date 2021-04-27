@@ -1,0 +1,9 @@
+﻿@using System.Text.Json
+@model IEnumerable<Microsoft.IdentityModel.Tokens.JsonWebKey>
+
+<h3>ASP.NET MVC - Key Ring</h3>
+<div>
+    <pre>
+@JsonSerializer.Serialize(Model, new JsonSerializerOptions() { IgnoreNullValues = true, WriteIndented = true })
+    </pre>
+</div>
