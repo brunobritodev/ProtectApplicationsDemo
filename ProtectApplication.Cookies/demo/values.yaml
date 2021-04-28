@@ -8,7 +8,7 @@ image:
   repository: bhdebrito/protect-application-demo
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "1.0"
 
 imagePullSecrets: []
 
@@ -44,9 +44,8 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: protect-application.akscds-dns-f8f1648a.hcp.westus.azmk8s.io
-      paths:
-      - path: /
+    - host: ""
+      paths: ["/protect"]
 
   tls: []
   #  - secretName: chart-example-tls
