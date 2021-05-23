@@ -48,9 +48,8 @@ ingress:
   hosts:
     - host: protect-application.local
       paths:
-      - path: /
-          serviceName: protect-application.local
-          servicePort: 80
+      - path: ["/protect"]
+        pathType: Prefix
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

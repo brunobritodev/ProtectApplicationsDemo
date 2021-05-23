@@ -11,6 +11,7 @@ COPY ["ProtectApplication.Cookies/ProtectApplication.Cookies.csproj", "ProtectAp
 RUN dotnet restore "ProtectApplication.Cookies/ProtectApplication.Cookies.csproj"
 COPY . .
 WORKDIR "/src/ProtectApplication.Cookies"
+RUN ls
 RUN dotnet build "ProtectApplication.Cookies.csproj" -c Release -o /app/build
 
 FROM build AS publish
