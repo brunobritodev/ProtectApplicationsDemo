@@ -10,7 +10,7 @@ using ProtectApplication.Jwt.Data;
 namespace ProtectApplication.Jwt.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210111062507_Initial")]
+    [Migration("20210908200449_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

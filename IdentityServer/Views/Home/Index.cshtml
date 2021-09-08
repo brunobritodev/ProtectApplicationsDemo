@@ -1,14 +1,10 @@
 @using System.Diagnostics
 
-@{
-    var version = FileVersionInfo.GetVersionInfo(typeof(IdentityServer4.Hosting.IdentityServerMiddleware).Assembly.Location).ProductVersion.Split('+').First();
-}
 
 <div class="welcome-page">
     <h1>
         <img src="~/icon.jpg">
         Welcome to IdentityServer4
-        <small class="text-muted">(version @version)</small>
     </h1>
 
     <ul>
