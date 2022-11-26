@@ -25,15 +25,41 @@ namespace ProtectApplicatio.Jwt.Api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProtectApplicatio.Jwt.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProtectApplication.Jwt.Api", Version = "v1" });
+
+                // To Enable authorization using Swagger (JWT)    
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\"",
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+
+                    }
+                });
             });
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
             {
-                x.RequireHttpsMetadata = true;
+                x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
-                x.SetJwksOptions(new JwkOptions("https://localhost:5001/jwks"));
+                x.SetJwksOptions(new JwkOptions("http://localhost:5001/jwks"));
             });
 
             services.AddAuthorization(options =>
@@ -56,11 +82,8 @@ namespace ProtectApplicatio.Jwt.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProtectApplicatio.Jwt.Api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProtectApplication.Jwt.Api v1"));
             }
-
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthentication();

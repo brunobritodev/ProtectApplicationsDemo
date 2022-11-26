@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using System.Linq;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +35,12 @@ namespace IdentityServer.Api.Controllers
         public IActionResult PolicyBased()
         {
             return Ok("Must have claim EmployeeFuction and value Manager and from Sales Department");
+        }
+        
+        [Authorize, HttpGet("claims")]
+        public IActionResult Claims()
+        {
+            return Ok(HttpContext.User.Claims.Select(s => new { type = s.Type, value = s.Value }));
         }
 
     }

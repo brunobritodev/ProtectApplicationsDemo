@@ -30,8 +30,8 @@ namespace IdentityServer.SecondApi
                     {
                         AuthorizationCode = new OpenApiOAuthFlow
                         {
-                            AuthorizationUrl = new Uri("https://localhost:5000/connect/authorize"),
-                            TokenUrl = new Uri("https://localhost:5000/connect/token"),
+                            AuthorizationUrl = new Uri("http://localhost:5001/connect/authorize"),
+                            TokenUrl = new Uri("http1://localhost:5001/connect/token"),
                             Scopes = new Dictionary<string, string>
                             {
                                 {"api2", "Access to this API - full access"}
@@ -46,8 +46,9 @@ namespace IdentityServer.SecondApi
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
                 {
-                    options.Authority = "https://localhost:5000";
+                    options.Authority = "https//localhost:5001";
                     options.Audience = "api2";
+                    options.RequireHttpsMetadata = false;
                 });
 
 
@@ -72,7 +73,7 @@ namespace IdentityServer.SecondApi
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
 
-                options.OAuthClientId("demo_api_swagger");
+                options.OAuthClientId("demo_api2_swagger");
                 options.OAuthClientSecret("secret");
                 options.OAuthAppName("Demo API - Swagger");
                 options.OAuthUsePkce();

@@ -30,8 +30,8 @@ namespace IdentityServer.Api
                     {
                         AuthorizationCode = new OpenApiOAuthFlow
                         {
-                            AuthorizationUrl = new Uri("https://localhost:5000/connect/authorize"),
-                            TokenUrl = new Uri("https://localhost:5000/connect/token"),
+                            AuthorizationUrl = new Uri("http://localhost:5001/connect/authorize"),
+                            TokenUrl = new Uri("http://localhost:5001/connect/token"),
                             Scopes = new Dictionary<string, string>
                             {
                                 {"api1", "Access to this API - full access"}
@@ -46,8 +46,9 @@ namespace IdentityServer.Api
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
                 {
-                    options.Authority = "https://localhost:5000";
+                    options.Authority = "http://localhost:5001";
                     options.Audience = "api1";
+                    options.RequireHttpsMetadata = false;
                 });
 
 

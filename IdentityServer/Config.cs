@@ -20,13 +20,15 @@ namespace IdentityServer
         public static IEnumerable<ApiScope> ApiScopes =>
             new[]
             {
-                new ApiScope("api1", "Full access to API #1") // "full access" scope
+                new ApiScope("api1", "Full access to API #1"), // "full access" scope
+                new ApiScope("api2", "Full access to API #2")
             };
 
         public static IEnumerable<ApiResource> ApiResources =>
             new[]
             {
                 new ApiResource("api1", "API #1") { Scopes = { "api1" }, UserClaims = {"openid", "EmployeeFunction", "role", "Department" } },
+                new ApiResource("api2", "API #2") { Scopes = { "api2" }, UserClaims = {"openid", "EmployeeFunction", "role", "Department" } },
             };
 
         public static IEnumerable<Client> Clients =>
@@ -44,6 +46,18 @@ namespace IdentityServer
                     RedirectUris = {"https://localhost:6001/swagger/oauth2-redirect.html"},
                     AllowedCorsOrigins = {"https://localhost:6001"},
                     AllowedScopes = {"api1"}
+                },
+                new Client
+                {
+                    ClientId = "demo_api2_swagger",
+                    ClientName = "Swagger UI for demo_api2",
+                    ClientSecrets = {new Secret("secret".Sha256())}, // change me!
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+                    RedirectUris = {"https://localhost:6003/swagger/oauth2-redirect.html"},
+                    AllowedCorsOrigins = {"https://localhost:6003"},
+                    AllowedScopes = {"api2"}
                 }
             };
 

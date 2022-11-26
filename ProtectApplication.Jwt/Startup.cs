@@ -83,7 +83,7 @@ namespace ProtectApplication.Jwt
             {
                 x.RequireHttpsMetadata = true;
                 x.SaveToken = true;
-                x.SetJwksOptions(new JwkOptions("https://localhost:5001/jwks"));
+                x.SetJwksOptions(new JwkOptions("http://localhost:5001/jwks"));
             });
 
             services.AddAuthorization(options =>
@@ -108,8 +108,6 @@ namespace ProtectApplication.Jwt
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProtectApplication.Jwt v1"));
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseJwksDiscovery();
